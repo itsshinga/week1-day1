@@ -13,7 +13,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="page2.html">About</a></li>
-        <li><a href="page4.html"></a>Gallery</li>
+        <li><a href="page4.html">Gallery</a></li>
         <li><a href="page3.html">Contact</a></li>
       </ul>
     </nav>
@@ -31,29 +31,40 @@
         <footer>&copy; Copyright 2020</footer>
       
         <script>
-          var photos = [];     // Will hold the <img> elements as strings
-          var fileNames = [];  // Will hold the file name stems (e.g. "winterland1")
-          var imageList = [];  // Will hold the final <li> ... </li> HTML strings
-          var image;           // Temporary variable to store each assembled list item
-          var openList = "<li id='photo'>"; 
+          var photos = [];     
+          var fileNames = [];  
+          var captions = ["BEAUTIFUL WINTER", "SNOW LAND", "FROSTY MORNING", "WINTER PATH", "SERENE SNOW", "COLD SUNSET"];
+          var descriptions = [
+              "A beautiful winter scenery in the morning",
+              "A peaceful snowy landscape",
+              "A frosty morning in the countryside",
+              "A scenic winter path through the trees",
+              "A serene snow-covered field",
+              "A golden sunset over the snow"
+          ];
+          var imageList = [];  
+          var openList = "<li class='photo-item'>"; 
           var closeList = "</li>";
       
-          // Create 6 images
+          // Create 6 images with captions
           for (var i = 0; i < 6; i++) {
-            fileNames.push("winterland" + (i + 1));  // e.g. "winterland1", "winterland2", ...
-            
-            // Push the <img> HTML into 'photos'
-            photos.push("<img src='images/" + fileNames[i] + ".jpg' />");
-            
-            // Combine <li> + the <img> + </li>
-            image = openList + photos[i] + closeList;
-            
-            // Add that fully assembled <li> to 'imageList'
-            imageList.push(image);
+              fileNames.push("winterland" + (i + 1));  
+      
+              // Construct the figure with an image and caption
+              photos.push(`
+                  <figure class="image-container">
+                      <img src='images/${fileNames[i]}.jpg' class="hover-image"/>
+                      <figcaption>${captions[i]}</figcaption>
+                      <div class="hover-text">${descriptions[i]}</div>
+                  </figure>
+              `);
+      
+              // Combine <li> + the <figure> + </li>
+              imageList.push(openList + photos[i] + closeList);
           }
       
-          // Convert the array of <li> items into one string, and assign to the UL
-          document.getElementById("album").innerHTML = imageList;
-        </script>
-      </body>
+          // JOIN to avoid extra commas in output
+          document.getElementById("album").innerHTML = imageList.join("");
+      </script>
+
       </html>

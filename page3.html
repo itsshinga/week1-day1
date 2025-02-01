@@ -13,7 +13,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="page2.html">About</a></li>
-        <li><a href="page4.html"></a>Gallery</li>
+        <li><a href="page4.html">Gallery</a></li>
         <li><a href="page3.html">Contact</a></li>
       </ul>
     </nav>
@@ -27,20 +27,32 @@
           <legend>User personal information</legend>
           <label>Enter your full name</label>
           <input type="text" name="name" />
-          <label>Enter your email</label>
-          <input type="email" name="email" />
-          <label>Enter your phone</label>
-          <input type="text" name="phone" />
+
           <label>Select your gender</label>
           <input type="radio" name="gender" value="male" />Male
           <input type="radio" name="gender" value="female" />Female
+
           <label>How should we contact you?</label>
-          <select>
-            <option>Email</option>
-            <option>Phone</option>
+          <select id="contactMethod">
+            <option value="">Select One</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
           </select>
-          <label>Tell us the reason of your visit today:</label>
+
+          <!-- Dynamic input fields -->
+          <div id="emailInput" style="display: none">
+            <label>Enter your email</label>
+            <input type="email" name="email" />
+          </div>
+
+          <div id="phoneInput" style="display: none">
+            <label>Enter your phone</label>
+            <input type="text" name="phone" />
+          </div>
+
+          <label>Tell us the reason for your visit today:</label>
           <textarea rows="5" cols="30"></textarea>
+
           <input type="submit" value="sign-up" />
         </fieldset>
       </form>
@@ -48,4 +60,24 @@
   </div>
 
   <footer>&copy; Copyright 2020</footer>
+
+  <script>
+    document
+      .getElementById("contactMethod")
+      .addEventListener("change", function () {
+        var emailField = document.getElementById("emailInput");
+        var phoneField = document.getElementById("phoneInput");
+
+        // Hide both initially
+        emailField.style.display = "none";
+        phoneField.style.display = "none";
+
+        // Show the corresponding field based on the selection
+        if (this.value === "email") {
+          emailField.style.display = "block";
+        } else if (this.value === "phone") {
+          phoneField.style.display = "block";
+        }
+      });
+  </script>
 </html>
